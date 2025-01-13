@@ -17,7 +17,7 @@ const Card = () => {
     useEffect(() => {
         const fetchteachers = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/auth/getdata");
+                const response = await axios.get("https://teacherprofile-backend.vercel.app/auth/getdata");
                 dispatch(handlefetch(response.data));
                 setFilteredTeachers(response.data);
             } catch (err) {
@@ -46,7 +46,7 @@ const Card = () => {
                             navigate("/profile");
                             dispatch(handleprofileid(teacher.id));
                             axios
-                                .get(`http://localhost:3000/auth/getuserdata/${teacher._id}`)
+                                .get(`https://teacherprofile-backend.vercel.app/auth/getuserdata/${teacher._id}`)
                                 .then((response) => {
                                     console.log(response.data);
                                     dispatch(handleprofileinfo(response.data));

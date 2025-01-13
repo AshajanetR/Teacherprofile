@@ -43,7 +43,7 @@ const UpdateForm = ({isupdate}) => {
     e.preventDefault();
     try {
       isupdate(false);
-      const response = await axios.put(`http://localhost:3000/auth/updateuserdata/${teacher._id}`, formData);
+      const response = await axios.put(`https://teacherprofile-backend.vercel.app/auth/updateuserdata/${teacher._id}`, formData);
       dispatch(handleprofileinfo(response.data)); 
       alert('Profile updated successfully');
     } catch (error) {
