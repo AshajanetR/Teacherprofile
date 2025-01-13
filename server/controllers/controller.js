@@ -29,18 +29,18 @@ export const teacherdata=async(req,res)=>{
 
 export const getdata=async(req,res)=>{
     try {
-        // Fetch all teachers from the database
+     
         const teachers = await teacherModel.find();
     
-        // If no teachers found, send an empty array
+        
         if (!teachers) {
           return res.status(404).json({ message: 'No teachers found' });
         }
     
-        // Send the teachers as a response
+      
         res.status(200).json(teachers);
       } catch (error) {
-        // If there is an error, send a 500 status and error message
+        
         res.status(500).json({ message: 'Server error', error: error.message });
       }
 }
@@ -50,7 +50,7 @@ export const getuserdata=async(req,res)=>{
     try {
         const teacherId = req.params.id;
     
-        // Convert teacherId to ObjectId before querying
+        
         if (!mongoose.Types.ObjectId.isValid(teacherId)) {
           return res.status(400).json({ message: 'Invalid teacher ID' });
         }
@@ -66,3 +66,34 @@ export const getuserdata=async(req,res)=>{
         res.status(500).json({ message: 'Server error' });
       }
 };
+
+export const  updatedata=async(req,res)=>{
+    try {
+        const teacherId = req.params.id;
+        const { name, subject, email, phone, bio, experience, profilePicture } = req.body;
+    
+        
+        const updatedTeacher = await teacherModel.findByIdAndUpdate(
+          teacherId,
+          {
+            name,
+            subject,
+            email,
+            phone,
+            bio,
+            experience,
+            profilePicture
+          },
+          { new: true, runValidators: true } 
+        );
+    
+        if (!updatedTeacher) {
+          return res.status(404).json({ message: 'Teacher not found' });
+        }
+    
+        res.status(200).json(updatedTeacher);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+      }
+}
