@@ -1,3 +1,9 @@
+## SETUP
+Run the following commands to setup the tool :
+```
+git clone https://github.com/AshajanetR/Teacherprofile.git
+```
+
 ## Setup the Client Application
 
 1.  Navigate to the client application directory:
